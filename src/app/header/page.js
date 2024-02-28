@@ -1,3 +1,4 @@
+"use client";
 import axios from 'axios';
 export default function Head({ url, member, token,memberInOut ,  setMemberInOut , setToken }) {
     const sigout = async (e) => {
