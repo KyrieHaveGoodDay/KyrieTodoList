@@ -93,14 +93,14 @@ export default function TodoList({ url, token }) {
                             <div key={index} className="flex justify-between items-center shadow shadow-gray-400 p-5 mb-5">
                                 <div>
                                     <p>{item.content}</p>
-                                    <div className="flex gap-2">
+                                    {/* <div className="flex gap-2">
                                         <input type="text" className="border border-slate-400"></input>
                                         <button className="bg-violet-500 py-1 px-3 rounded text-white ">完成</button>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="flex gap-2">
                                     <button onClick={() => SatateData(item.id)} className="bg-violet-500 py-1 px-3 rounded text-white ">確認</button>
-                                    <button className="bg-violet-500 py-1 px-3 rounded text-white ">更新</button>
+                                    {/* <button className="bg-violet-500 py-1 px-3 rounded text-white ">更新</button> */}
                                     <button onClick={() => removeData(item.id)} className="bg-violet-500 py-1 px-3 rounded text-white ">刪除</button>
                                 </div>
                             </div>
