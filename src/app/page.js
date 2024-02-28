@@ -17,7 +17,7 @@ export default function Home() {
     <div>
       <Head url={url} member={member} setMember={setMember} token={token} setToken={setToken} memberInOut={memberInOut} setMemberInOut={setMemberInOut}/>
       
-      <div className={`flex justify-center items-center gap-10 mt-20 ${memberInOut ? 'hidden': null}`} >
+      <div className={`lg:flex lg:justify-center lg:items-center lg:gap-10 mt-20 ${memberInOut ? 'hidden': null}`} >
         <Sigup url={url} />
         <Login url={url} setMember={setMember} setToken={setToken} setMemberInOut={setMemberInOut} />
       </div>

@@ -30,7 +30,7 @@ export default function Login({url , setMember , setToken , setMemberInOut}) {
         }
     }
     return (
-        <div>
+        <div className="mb-10 xl:mb-0">
             <form className="mx-auto w-[400px] py-10 px-5 h-[350px] shadow shadow-gray-400 rounded">
                 <div className="mb-5 text-center text-2xl">登入</div>
                 <div className="mb-5">
