@@ -13,7 +13,7 @@ export default function Sigup({url}) {
   const [nickname, setNickname] = useState();
 
   const sigup = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const res = await axios.post(`${url}/users/sign_up`, {
         email:email,

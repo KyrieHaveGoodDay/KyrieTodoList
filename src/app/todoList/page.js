@@ -67,9 +67,6 @@ export default function TodoList({ url, token }) {
             })
 
     }
-
-    console.log(getData);
-
     return (<div className="mx-auto lg:w-[600px] md:w-full w-full px-3 py-5">
 
         <div className="my-5">

@@ -11,17 +11,19 @@ export default function Login({url , setMember , setToken , setMemberInOut}) {
     const [password, setPassword] = useState();
 
     const sigin = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
             const res = await axios.post(`${url}/users/sign_in`, {
                 email: email,
                 password: password,
             })
-            setToken(res.data.token)
-            setMember(res.data.nickname)
-            setMemberInOut(true)
+            console.log('登入成功');
             setEmail('');
             setPassword('');
+            setToken(res.data.token);
+            setMember(res.data.nickname);
+            setMemberInOut(true);
+            
         } catch (error) {
             console.log(error);
             alert(error.response.data.message)
@@ -33,11 +35,11 @@ export default function Login({url , setMember , setToken , setMemberInOut}) {
                 <div className="mb-5 text-center text-2xl">登入</div>
                 <div className="mb-5">
                     <label htmlFor="email" className="mr-2 w-1/6">信箱</label>
-                    <input type="email" onChange={(e) => setEmail(e.target.value)} name="email" id="email" className="w-5/6 border border-slate-400" required />
+                    <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" id="email" className="w-5/6 border border-slate-400" required />
                 </div>
                 <div className="mb-5">
                     <label htmlFor="password" className="mr-2 w-1/6">密碼</label>
-                    <input type="password" onChange={(e) => setPassword(e.target.value)} name="password" id="password" className="w-5/6 border border-slate-400" required />
+                    <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} name="password" id="password" className="w-5/6 border border-slate-400" required />
                 </div>
                 <div className="text-center">
                     <input type="button" value="登入" onClick={sigin} className="border border-slate-400 py-1 px-6" />
