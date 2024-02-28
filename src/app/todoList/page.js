@@ -73,10 +73,10 @@ export default function TodoList({ url, token }) {
             <div className="text-3xl mb-3">Add</div>
             <div className="flex justify-between items-center shadow shadow-gray-400 p-5 mb-5">
                 <div>
-                    <input type="text" onChange={(e) => setNewData(e.target.value)} className="border border-slate-400 "></input>
+                    <input type="text" onChange={(e) => setNewData(e.target.value)} value={newData} className="border border-slate-400 "></input>
                 </div>
                 <div>
-                    <button onClick={addData} className="bg-violet-500 py-1 px-3 rounded text-white ">完成</button>
+                    <button onClick={addData} className="bg-violet-500 py-1 px-3 rounded text-white ">新增</button>
                 </div>
             </div>
         </div>
