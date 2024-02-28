@@ -12,7 +12,7 @@ export default function Home() {
   const [memberInOut, setMemberInOut] = useState(false);
   const [member, setMember] = useState('');
   const [token, setToken] = useState();
-
+  console.log(memberInOut);
   return (
     <div>
       <Head url={url} member={member} setMember={setMember} token={token} setToken={setToken} memberInOut={memberInOut} setMemberInOut={setMemberInOut}/>
