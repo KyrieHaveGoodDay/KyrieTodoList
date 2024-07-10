@@ -15,8 +15,14 @@ export default function TodoList({ url, token }) {
             headers: {
                 Authorization: token,
             },
+        })
+        const updatedData = res.data.data.map(item => {
+            return {
+                ...item,
+                updateStat: false
+            }
         });
-        setGetData(res.data.data)
+        setGetData(updatedData)
 
     }
 
@@ -52,6 +58,36 @@ export default function TodoList({ url, token }) {
             })
 
     }
+
+    // 更新資料狀態
+    const updatedStat = async (id) => {
+        const upItem = getData.find((item) => item.id === id);
+        const newStatus = !upItem.updateStat;
+        setGetData(getData.map(item =>
+            item.id === id ? { ...item, updateStat: newStatus } : item
+        ));
+
+        if (!newStatus) {
+            console.log('可以更新');
+            await axios.put(
+                `${url}/todos/${id}`,
+                { content: upItem.content },
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
+        }
+    }
+
+    // 更新資料內容
+    const handleContentChange = (value, item) => {
+        setGetData(getData.map(dataItem =>
+            dataItem.id === item.id ? { ...dataItem, content: value } : dataItem
+        ));
+    };
+
     // 資料狀態
     const SatateData = async (id) => {
         const res = await axios.patch(`${url}/todos/${id}/toggle`,
@@ -85,25 +121,30 @@ export default function TodoList({ url, token }) {
             <div className="text-3xl mb-3">TodoList</div>
             {
                 getData.map((item, index) => {
-                    if(!item.status){
+                    if (!item.status) {
                         return (
                             <div key={index} className="flex justify-between items-center shadow shadow-gray-400 p-5 mb-5">
                                 <div>
-                                    <p>{item.content}</p>
-                                    {/* <div className="flex gap-2">
-                                        <input type="text" className="border border-slate-400"></input>
-                                        <button className="bg-violet-500 py-1 px-3 rounded text-white ">完成</button>
-                                    </div> */}
+                                    {!item.updateStat && <p>{item.content}</p>}
+                                    {
+                                        item.updateStat && <div className="flex gap-2">
+                                            <input type="text" onChange={(e) => { handleContentChange(e.target.value, item) }} value={item.content} className="border border-slate-400" ></input>
+                                            <button onClick={() => updatedStat(item.id)} className="bg-violet-500 py-1 px-3 rounded text-white ">完成</button>
+                                        </div>
+                                    }
+
+                                    {/* updatedData(item) */}
                                 </div>
                                 <div className="flex gap-2">
                                     <button onClick={() => SatateData(item.id)} className="bg-violet-500 py-1 px-3 rounded text-white ">確認</button>
-                                    {/* <button className="bg-violet-500 py-1 px-3 rounded text-white ">更新</button> */}
+                                    {!item.updateStat && <button onClick={() => updatedStat(item.id)} className="bg-violet-500 py-1 px-3 rounded text-white ">更新</button>}
+
                                     <button onClick={() => removeData(item.id)} className="bg-violet-500 py-1 px-3 rounded text-white ">刪除</button>
                                 </div>
                             </div>
                         );
                     }
-                    
+
                 })
             }
 
@@ -113,12 +154,12 @@ export default function TodoList({ url, token }) {
             <div className="text-3xl mb-3">Check</div>
             {
                 getData.map((item, index) => {
-                    if(item.status){
+                    if (item.status) {
                         return (
                             <div key={index} className="flex justify-between items-center shadow shadow-gray-400 p-5 mb-5">
                                 <div>
                                     <p>{item.content}</p>
-    
+
                                 </div>
                                 <div className="flex gap-2">
                                     <button onClick={() => SatateData(item.id)} className="bg-violet-500 py-1 px-3 rounded text-white ">返回</button>
@@ -126,7 +167,7 @@ export default function TodoList({ url, token }) {
                             </div>
                         );
                     }
-                    
+
                 })
             }
 
